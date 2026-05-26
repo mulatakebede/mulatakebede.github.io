@@ -7,6 +7,72 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
+<!- - Add this inside your <style> block or copy the whole block - ->
+<style>
+/* Video wrapper with custom cover */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.video-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.2s ease;
+  z-index: 2;
+  border-radius: 12px;
+}
+.video-cover:hover {
+  filter: brightness(0.92);
+}
+.play-btn {
+  width: 80px;
+  height: 80px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+.video-cover:hover .play-btn {
+  transform: scale(1.1);
+  background: rgba(0,0,0,0.85);
+}
+.play-btn::after {
+  content: "▶";
+  color: white;
+  font-size: 40px;
+  margin-left: 5px;
+}
+
+
+
+
+
+  
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Source Sans 3',sans-serif;background:#f5f4f0;color:#2c2c2c;line-height:1.7}
@@ -442,6 +508,12 @@ footer a{color:#1a3060;text-decoration:none}
   </div>
 </main>
 
+<!-- HTML structure (place this where you want the video) -->
+<div class="video-wrapper" id="customVideo">
+  <div class="video-cover" style="background-image: url('images/thumbnail-1636.jpg');">
+    <div class="play-btn"></div>
+  </div>
+</div>
 <!-- SIDEBAR -->
 <aside>
   <div class="sblock">
@@ -520,3 +592,30 @@ footer a{color:#1a3060;text-decoration:none}
 
 </body>
 </html>
+
+
+
+
+<!-- JavaScript: load YouTube iframe on click with autoplay and clip timestamps -->
+<script>
+(function() {
+  const wrapper = document.getElementById('customVideo');
+  if (!wrapper) return;
+  const cover = wrapper.querySelector('.video-cover');
+  if (!cover) return;
+
+  cover.addEventListener('click', function() {
+    // Create iframe element
+    const iframe = document.createElement('iframe');
+    // Use start=912&end=1033 (15:12 to 17:13) and autoplay=1
+    iframe.src = 'https://www.youtube.com/embed/qb3WbOqWKc8?start=912&end=1033&autoplay=1';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    
+    // Replace cover with iframe
+    wrapper.removeChild(cover);
+    wrapper.appendChild(iframe);
+  });
+})();
+</script>
