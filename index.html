@@ -354,6 +354,30 @@ footer a{color:#1a3060;text-decoration:none}
         </div>
       </div>
 
+      <!-- PROPERTY MANAGEMENT SYSTEM DEMO -->
+      <div class="media-card full">
+        <div class="video-wrap" id="vid2">
+          <div class="video-cover" onclick="playVideo('vid2','qb3WbOqWKc8',912,1033)">
+            <img class="video-thumb" src="https://i.ytimg.com/vi/qb3WbOqWKc8/maxresdefault.jpg" alt="Property Management System Demo" onerror="this.style.display='none'">
+            <div class="play-circle"></div>
+            <div class="video-meta">
+              <div class="vm-source">💻 Software Demo · Project Showcase</div>
+              <div class="vm-title">Raya University Property Management System (RU-PMS)</div>
+              <div class="vm-date">Asset tracking · Audit reporting · Web interface &nbsp;·&nbsp; Click to watch demo</div>
+            </div>
+          </div>
+        </div>
+        <div class="media-info">
+          <h4>Raya University Property Management System — Live Demo</h4>
+          <p>A full-featured asset tracking and property management system built for Raya University — covering inventory tracking, audit reporting, and web-based administration interface.</p>
+          <span class="media-tag">Django</span>
+          <span class="media-tag">Web App</span>
+          <span class="media-tag">Database</span>
+          <span class="media-tag">Raya University</span>
+          <a href="https://www.youtube.com/watch?v=qb3WbOqWKc8&t=912s" class="media-link" target="_blank">→ Watch on YouTube</a>
+        </div>
+      </div>
+
       <!-- PLACEHOLDER CARDS for future media -->
       <div class="media-card" style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;min-height:160px">
         <div style="font-size:1.8rem;margin-bottom:0.6rem">📰</div>
@@ -437,11 +461,13 @@ footer a{color:#1a3060;text-decoration:none}
 </footer>
 
 <script>
-function playVideo(wrapperId, videoId, startTime) {
+function playVideo(wrapperId, videoId, startTime, endTime) {
   const wrap = document.getElementById(wrapperId);
   const cover = wrap.querySelector('.video-cover');
   const iframe = document.createElement('iframe');
-  const src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1' + (startTime ? '&start=' + startTime : '');
+  let src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+  if (startTime) src += '&start=' + startTime;
+  if (endTime)   src += '&end=' + endTime;
   iframe.src = src;
   iframe.setAttribute('frameborder', '0');
   iframe.setAttribute('allowfullscreen', '');
